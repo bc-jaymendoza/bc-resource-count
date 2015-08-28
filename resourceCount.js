@@ -13,14 +13,15 @@ $.get("/admin/ninja", function(resp) {
 	var doc = (new DOMParser).parseFromString(resp, 'text/html');
 
 	var productCount = getProductCount(doc);
-	console.log("Products: " + productCount);
-
 	var categoryCount = getCategoryCount(doc);
-	console.log("Categories: " + categoryCount);
-
 	var customerCount = getCustomerCount(doc);
-	console.log("Customers: " + customerCount);
 
+	counts = "<br> \
+			  Products: "+productCount+"<br> \
+			  Categories: "+categoryCount+"<br> \
+			  Customers: "+customerCount;
+
+	$('li.logo').append(counts);
 });
 
 function getProductCount(doc) {
