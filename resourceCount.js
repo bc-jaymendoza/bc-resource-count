@@ -18,6 +18,9 @@ $.get("/admin/ninja", function(resp) {
 	var categoryCount = getCategoryCount(doc);
 	console.log("Categories: " + categoryCount);
 
+	var customerCount = getCustomerCount(doc);
+	console.log("Customers: " + customerCount);
+
 });
 
 function getProductCount(doc) {
@@ -28,6 +31,9 @@ function getCategoryCount(doc) {
 	return getElementByXpath('//*[@id="content"]/dl[12]/dd[2]/code', doc);
 }
 
+function getCustomerCount(doc) {
+	return getElementByXpath('//*[@id="content"]/dl[3]/dd[4]/code', doc);
+}
 
 function getElementByXpath(path, doc) {
   return document.evaluate(path, doc, null, XPathResult.STRING_TYPE, null).stringValue;
