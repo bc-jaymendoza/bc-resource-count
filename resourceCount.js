@@ -9,19 +9,26 @@
 // @require      http://code.jquery.com/jquery-latest.js
 // ==/UserScript==
 
-$.get("/admin/ninja", function(resp) {
-	var doc = (new DOMParser).parseFromString(resp, 'text/html');
+$('li.logo > a > img').click(function() {
+	$.get("/admin/ninja", function(resp) {
+		var doc = (new DOMParser).parseFromString(resp, 'text/html');
 
-	var productCount = getProductCount(doc);
-	var categoryCount = getCategoryCount(doc);
-	var customerCount = getCustomerCount(doc);
+		var productCount = getProductCount(doc);
+		var categoryCount = getCategoryCount(doc);
+		var customerCount = getCustomerCount(doc);
 
-	counts = "<br> \
-			  Products: "+productCount+"<br> \
-			  Categories: "+categoryCount+"<br> \
-			  Customers: "+customerCount;
+		counts = "<div id='resourceCounts'> \
+		<br> \
+		Products: "+productCount+"<br> \
+		Categories: "+categoryCount+"<br> \
+		Customers: "+customerCount+"</div>";
 
-	$('li.logo').append(counts);
+		if ($('li.logo > #resourceCounts').length) {
+			$('li.logo > #resourceCounts').html(counts);
+		} else {
+			$('li.logo').append(counts);
+		}
+	});
 });
 
 function getProductCount(doc) {
