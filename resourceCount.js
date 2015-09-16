@@ -9,8 +9,9 @@
 // @require      http://code.jquery.com/jquery-latest.js
 // ==/UserScript==
 
-$('li.logo > a > img').click(function() {
+$('li.logo > a > img').click(function(event) {
 	$.get("/admin/ninja", function(resp) {
+		event.preventDefault();
 		var doc = (new DOMParser).parseFromString(resp, 'text/html');
 
 		var productCount = getProductCount(doc);
